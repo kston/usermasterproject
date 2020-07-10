@@ -3,6 +3,8 @@ class UserController {
     this.form = new Form();
     this.formEl = document.getElementById(formIdCreate);
     this.tableEl = document.getElementById(tableId);
+
+    this.selectAll();
     this.onSubmit();
   }
 
@@ -19,6 +21,8 @@ class UserController {
           values.photo = content;
 
           this.addLine(values);
+
+          values.save();
 
           this.formEl.reset();
 
@@ -96,6 +100,18 @@ class UserController {
       }
     });
   }
+  selectAll() {
+    let users = User.getUsersStorage();
+
+    users.forEach((dataUser) => {
+      let user = new User();
+
+      user.loadFromJSON(dataUser);
+
+      this.addLine(user);
+    });
+  }
+
   addLine(dataUser) {
     let tr = this.setTr(dataUser);
 

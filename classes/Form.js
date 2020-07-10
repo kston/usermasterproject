@@ -32,6 +32,7 @@ class Form {
               type="radio"
               id="exampleInputGenderM"
               name="gender"
+              value="M"
               checked
             />
             Masculino</label
@@ -43,6 +44,7 @@ class Form {
               type="radio"
               id="exampleInputGenderF"
               name="gender"
+              value="F"
             />
             Feminino</label
           >
