@@ -8,9 +8,9 @@ class Form {
     let newForm = document.createElement('div');
     newForm.innerHTML = `
     <div class="box-header with-border">
-                  <h3 class="box-title">Novo Usuário</h3>
+                  <h3 class="box-title"> Formulário</h3>
             </div>
-            <form role="form" id="form-user-create">
+            <form role="form" id="form-user">
     <div class="box-body">
       <div class="form-group">
         <label for="exampleInputName">Nome</label>
@@ -32,6 +32,7 @@ class Form {
               type="radio"
               id="exampleInputGenderM"
               name="gender"
+              checked
             />
             Masculino</label
           >

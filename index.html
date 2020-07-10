@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
     <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css" />
 
-    <script src="./classes/Form.js"></script>
+    <script src="./classes/Form.js"defer></script>
+    <script src="./classes/Utils.js" defer></script>
     <script src="./models/User.js" defer></script>
     <script src="./controllers/UserController.js" defer></script>
     <script src="./index.js" defer></script>
@@ -171,7 +172,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id='table-users'>
                     <thead>
                       <tr>
                         <th style="width: 10px;">Foto</th>
@@ -195,7 +196,7 @@
                   <!-- small box -->
                   <div class="small-box bg-green">
                     <div class="inner">
-                      <h3>44</h3>
+                      <h3 id= "number-users">22</h3>
 
                       <p>Novos Usuários</p>
                     </div>
@@ -209,7 +210,7 @@
                   <!-- small box -->
                   <div class="small-box bg-yellow">
                     <div class="inner">
-                      <h3>15</h3>
+                      <h3 id="number-users-admin">0</h3>
                       <p>Administradores</p>
                     </div>
                     <div class="icon">
