@@ -1,7 +1,9 @@
 class UserController {
-  constructor(formIdCreate, tableId) {
+  constructor(tableId) {
     this.form = new Form();
-    this.formEl = document.getElementById(formIdCreate);
+    this.Newform = this.form.createNewForm();
+    this.formEl = document.getElementById('form-user-create');
+    this.formUpdateEl = document.getElementById('form-user-update');
     this.tableEl = document.getElementById(tableId);
 
     this.selectAll();
@@ -132,11 +134,50 @@ class UserController {
             <td>${dataUser.admin ? 'Sim' : 'Não'}</td>
             <td>${Utils.dateFormat(dataUser.register)}</td>
             <td>
-                <button type="button" class="btn btn-primary btn-edit btn-xs btn-flat">Editar</button>
+                <button type="button" class="btn btn-primary btn-edit btn-xs btn-flat" data-toggle="modal" data-target="#myModal">Editar</button>
                 <button type="button" class="btn btn-danger btn-delete btn-xs btn-flat">Excluir</button>
             </td>
         `;
 
+    this.addEventsTr(tr);
     return tr;
+  }
+
+  addEventsTr(tr) {
+    tr.querySelector('.btn-edit').addEventListener('click', (e) => {
+      let json = JSON.parse(tr.dataset.user);
+      this.formUpdateEl.dataset.trIndex = tr.sectionRowIndex;
+
+      for (let name in json) {
+        let field = this.formUpdateEl.querySelector(
+          '[name=' + name.replace('_', '') + ']'
+        );
+
+        if (field) {
+          switch (field.type) {
+            case 'file':
+              continue;
+              break;
+
+            case 'radio':
+              field = this.formUpdateEl.querySelector(
+                '[name=' + name.replace('_', '') + '][value=' + json[name] + ']'
+              );
+              field.checked = true;
+              break;
+
+            case 'checkbox':
+              field.checked = json[name];
+              break;
+
+            default:
+              field.value = json[name];
+          }
+        }
+      }
+
+      this.formUpdateEl.querySelector('.photo').src = json._photo;
+      console.log(json);
+    });
   }
 }
