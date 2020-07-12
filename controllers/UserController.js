@@ -1,13 +1,64 @@
 class UserController {
   constructor(tableId) {
     this.form = new Form();
-    this.Newform = this.form.createNewForm();
     this.formEl = document.getElementById('form-user-create');
     this.formUpdateEl = document.getElementById('form-user-update');
     this.tableEl = document.getElementById(tableId);
 
     this.selectAll();
     this.onSubmit();
+    this.onEdit();
+  }
+
+  onEdit() {
+    this.formUpdateEl
+      .querySelector('[type=button]')
+      .addEventListener('click', () => {
+        location.reload();
+      });
+
+    this.formUpdateEl.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      let btn = this.formUpdateEl.querySelector('[type=submit]');
+
+      btn.disabled = true;
+
+      let values = this.getValues(this.formUpdateEl);
+
+      let index = this.formUpdateEl.dataset.trIndex;
+
+      let tr = this.tableEl.rows[index];
+
+      let userOld = JSON.parse(tr.dataset.user);
+
+      let result = Object.assign({}, userOld, values);
+
+      this.getPhoto(this.formUpdateEl).then(
+        (content) => {
+          if (!values.photo) {
+            result._photo = userOld._photo;
+          } else {
+            result._photo = content;
+          }
+
+          let user = new User();
+
+          user.loadFromJSON(result);
+
+          user.save();
+
+          this.setTr(user, tr);
+
+          location.reload();
+
+          btn.disabled = false;
+        },
+        (e) => {
+          console.error(e);
+        }
+      );
+    });
   }
 
   onSubmit() {
@@ -41,7 +92,7 @@ class UserController {
     let user = {};
     let isValid = true;
 
-    [...formEl.elements].forEach((field, index) => {
+    [...formEl.elements].forEach((field) => {
       if (
         ['name', 'email', 'password'].indexOf(field.name) > -1 &&
         !field.value

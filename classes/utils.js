@@ -1,5 +1,10 @@
 class Utils {
   static dateFormat(date) {
+    if (date.getMinutes() < 10) {
+      this.minutes = '0' + date.getMinutes();
+    } else {
+      this.minutes = date.getMinutes();
+    }
     return (
       date.getDate() +
       '/' +
@@ -9,7 +14,7 @@ class Utils {
       ' ' +
       date.getHours() +
       ':' +
-      date.getMinutes()
+      this.minutes
     );
   }
 }

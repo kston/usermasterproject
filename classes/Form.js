@@ -2,6 +2,7 @@ class Form {
   constructor() {
     this.box = document.querySelector('#box');
     this.modal = document.querySelector('#myModal');
+    this.createNewForm();
     this.createModalEditForm();
   }
 
@@ -35,9 +36,11 @@ class Form {
     if (value) {
       this.typeofForm = 'form-user-create';
       this.formName = 'Novo Usuário';
+      this.btnCancel = 'reset';
     } else {
       this.typeofForm = 'form-user-update';
       this.formName = 'Editar Usuário';
+      this.btnCancel = 'button';
     }
 
     return `
@@ -51,7 +54,7 @@ class Form {
        <input
          type="text"
          class="form-control"
-         id="exampleInputName"
+         {id="exampleInputName"}
          placeholder="Digite o nome do usuário"
          name="name"
          
@@ -64,7 +67,7 @@ class Form {
          <label for="exampleInputGenderM">
            <input
              type="radio"
-             id="exampleInputGenderM"
+             {id="exampleInputGenderM"}
              name="gender"
              value="M"
              checked
@@ -76,7 +79,7 @@ class Form {
          <label for="exampleInputGenderF">
            <input
              type="radio"
-             id="exampleInputGenderF"
+             {id="exampleInputGenderF"}
              name="gender"
              value="F"
            />
@@ -90,7 +93,7 @@ class Form {
        <input
          type="date"
          class="form-control"
-         id="exampleInputBirth"
+         {id="exampleInputBirth"}
          name="birth"
        />
    
@@ -99,7 +102,7 @@ class Form {
        <label for="exampleInputCountry">País</label>
        <select
          class="form-control"
-         id="exampleInputCountry"
+         {id="exampleInputCountry"}
          name="country"
        >
          <option value="" selected="selected"
@@ -448,7 +451,7 @@ class Form {
        <input
          type="email"
          class="form-control"
-         id="exampleInputEmail1"
+         {id="exampleInputEmail1"}
          placeholder="Digite o e-mail"
          name="email"
        />
@@ -458,14 +461,14 @@ class Form {
        <input
          type="password"
          class="form-control"
-         id="exampleInputPassword1"
+         {id="exampleInputPassword1"}
          placeholder="Crie uma senha"
          name="password"
        />
      </div>
      <div class="form-group">
        <label for="exampleInputFile">Foto</label>
-       <input type="file" id="exampleInputFile" name="photo" />
+       <input type="file" {id="exampleInputFile"} name="photo" class="photo"/>
      </div>
      <div class="checkbox">
        <label>
@@ -478,7 +481,7 @@ class Form {
      <button type="submit" class="btn btn-success">
        Salvar
      </button>
-     <button type="button" class="btn btn-danger">Cancelar</button>
+     <button type="${this.btnCancel}" class="btn btn-danger">Cancelar</button>
    </div>
  </form>
    `;
