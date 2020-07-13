@@ -481,7 +481,7 @@ class Form {
      <button type="submit" class="btn btn-success">
        Salvar
      </button>
-     <button type="${this.btnCancel}" class="btn btn-danger">Cancelar</button>
+     <button type="${this.btnCancel}" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
    </div>
  </form>
    `;

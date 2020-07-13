@@ -11,12 +11,6 @@ class UserController {
   }
 
   onEdit() {
-    this.formUpdateEl
-      .querySelector('[type=button]')
-      .addEventListener('click', () => {
-        location.reload();
-      });
-
     this.formUpdateEl.addEventListener('submit', (event) => {
       event.preventDefault();
 
@@ -195,6 +189,17 @@ class UserController {
   }
 
   addEventsTr(tr) {
+    tr.querySelector('.btn-delete').addEventListener('click', (e) => {
+      if (confirm('Deseja realmente excluir?')) {
+        let user = new User();
+
+        user.loadFromJSON(JSON.parse(tr.dataset.user));
+
+        user.remove();
+
+        tr.remove();
+      }
+    });
     tr.querySelector('.btn-edit').addEventListener('click', (e) => {
       let json = JSON.parse(tr.dataset.user);
       this.formUpdateEl.dataset.trIndex = tr.sectionRowIndex;
