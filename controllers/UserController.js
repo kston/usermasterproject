@@ -44,6 +44,8 @@ class UserController {
 
           this.setTr(user, tr);
 
+          this.updateCount();
+
           location.reload();
 
           btn.disabled = false;
@@ -163,6 +165,8 @@ class UserController {
     let tr = this.setTr(dataUser);
 
     this.tableEl.appendChild(tr);
+
+    this.updateCount();
   }
 
   setTr(dataUser, tr = null) {
@@ -198,6 +202,8 @@ class UserController {
         user.remove();
 
         tr.remove();
+
+        this.updateCount();
       }
     });
     tr.querySelector('.btn-edit').addEventListener('click', (e) => {
@@ -233,7 +239,22 @@ class UserController {
       }
 
       this.formUpdateEl.querySelector('.photo').src = json._photo;
-      console.log(json);
+      //console.log(json);
     });
+  }
+
+  updateCount() {
+    let numberUsers = 0;
+    let numberAdmin = 0;
+
+    [...this.tableEl.children].forEach((tr) => {
+      numberUsers++;
+      let user = JSON.parse(tr.dataset.user);
+
+      if (user._admin) numberAdmin++;
+    });
+
+    document.querySelector('#number-users').innerHTML = numberUsers;
+    document.querySelector('#number-users-admin').innerHTML = numberAdmin;
   }
 }
