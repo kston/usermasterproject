@@ -5,9 +5,9 @@ class UserController {
     this.formUpdateEl = document.getElementById('form-user-update');
     this.tableEl = document.getElementById(tableId);
 
-    this.selectAll();
     this.onSubmit();
     this.onEdit();
+    this.selectAll();
   }
 
   onEdit() {
@@ -67,9 +67,9 @@ class UserController {
         (content) => {
           values.photo = content;
 
-          this.addLine(values);
-
           values.save();
+
+          this.addLine(values);
 
           this.formEl.reset();
 
@@ -124,7 +124,7 @@ class UserController {
     return new Promise((resolve, reject) => {
       let fileReader = new FileReader();
 
-      let elements = [...formEl.elements].filter((item) => {
+      let elements = [...formEl.elements].filter((item, index) => {
         if (item.name === 'photo') {
           return item;
         }

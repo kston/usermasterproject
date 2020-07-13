@@ -109,7 +109,6 @@ class User {
 
     localStorage.setItem('users', JSON.stringify(users));
   }
-
   remove() {
     let users = User.getUsersStorage();
 
